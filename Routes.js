@@ -1,21 +1,26 @@
-import React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import React, { useState } from "react";
+import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 
-import Dogs from './Dogs'
-import DogDetails from './DogDetails'
+import Color from "./Color";
+import Colors from "./Colors";
+import ColorForm from "./ColorForm";
 
-function Routes (props) {
-    return (
-        <>
+function Routes() {
+    const [colors, setColors] = useState();
+
+    const addColor = setColors(newColor)
+
+
+  return (
+    <BrowserRouter>
         <Switch>
-            <Route exact path='/dogs/'>
-                <Dogs array={props}/></Route>
-            <Route exact path='/dogs/:name'>
-                <DogDetails array={props}/></Route>
-            <Redirect to='dogs' />
+            <Route exact path='/colors'><Colors colors={colors}/></Route>
+            <Route exact path='/colors/:color'><Color /></Route>
+            <Route exact path='/colors/new'><ColorForm addColor={addColor}/></Route>
+            <Redirect to='/colors' />
         </Switch>
-        </>
-    )
+    </BrowserRouter>
+  );
 }
 
-export default Routes
+export default Routes;
